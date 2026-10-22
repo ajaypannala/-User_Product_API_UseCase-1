@@ -1,19 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-import os
 
-from app.schemas.settings import Settings
+from app.schemas.settings import settings
 
 
-settings = Settings()
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    f"postgresql+psycopg2://postgres:{settings.db_password}@localhost:5432/user_product_db"
-)
-
+DATABASE_URL = settings.database_url
 
 engine = create_engine(DATABASE_URL)
-
 
 SessionLocal = sessionmaker(
     autocommit=False,
@@ -26,7 +19,6 @@ Base = declarative_base()
 
 def get_db():
     db = SessionLocal()
-
     try:
         yield db
     finally:

@@ -5,8 +5,8 @@ from jose import JWTError, jwt
 from app.schemas.settings import settings
 
 
-SECRET_KEY = settings.SECRET_KEY
-ALGORITHM = settings.ALGORITHM
+SECRET_KEY = settings.secret_key
+ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
